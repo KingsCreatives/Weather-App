@@ -101,3 +101,65 @@ ul{
     max-height: 40px;
     text-align: center;
 }
+
+/* Ajax Section */
+.ajax-section{
+    margin: 3.1rem 0 1.3rem;
+}
+
+.cities{
+    display: grid;
+    grid-gap: 2rem 1.3rem;
+    grid-template-columns: repeat(4,1fr);
+}
+
+.city{
+    background: var(--text-med );
+    color: var(--text-light);
+    position: relative;
+    padding: 2.25rem 10%;
+    border-radius: 20px;
+}
+
+.city::after{
+    content: '';
+    width: 90%;
+    height: 50px;
+    position: absolute;
+    bottom: -12px;
+    left: 5%;
+    z-index: -1;
+    opacity: 0.3;
+    border-radius: 20px;
+    background: var(--text_light);
+}
+
+.ajax-section figcaption{
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.ajax-section .city-temp{
+    color: var(--text-dark);
+    font-size: 5rem;
+    font-weight: bold;
+    margin-top: 0.3rem;
+}
+
+.ajax-section .city sup{
+    font-size: 0.5em;
+}
+
+.ajax-section .city-name sup{
+    background: var(--orange);
+    color: var(--text-light);
+    padding: 0.2em 0.6em;
+    border-radius: 30px;
+}
+
+.ajax-section .city-icon{
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+}
