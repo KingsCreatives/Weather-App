@@ -163,3 +163,42 @@ ul{
     width: 100px;
     height: 100px;
 }
+
+/* Media queries */
+
+@media screen and (max-width: 1000px) {
+    .cities{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .weather-form{
+        flex-direction: column;
+    }
+
+    .weather-form input, .submit-btn{
+        width: 100%;
+    }
+
+    .submit-btn{
+        margin-top: 1.2rem;
+    }
+
+    .message{
+        position: static;
+        max-width: none;
+        min-height: 0;
+        margin-top: 0.61rem;
+    }
+
+    .cities{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .cities{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
