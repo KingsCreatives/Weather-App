@@ -46,3 +46,58 @@ img{
 ul{
     list-style: none;
 }
+
+/* Top Banner */
+.top-banner{
+    color: var(--text-light);
+    text-align: center;
+}
+
+.heading{
+    font-size: 3.8rem;
+    font-weight: bold;
+    padding-bottom: 1.8rem;
+}
+
+/* form */
+.weather-form{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather-form input{
+    font-size: 2rem;
+    padding: 0.3rem 0.3rem 0.3rem;
+    border-bottom: 1px solid;
+}
+
+.weather-form input::placeholder{
+    color: currentColor;
+}
+
+/* form button */
+.submit-btn{
+    background: var(--red);
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    padding: 1rem 1.1rem;
+    margin-left: 1rem;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.submit-btn:hover{
+    background: var(--darkred);
+}
+
+.message{
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    max-width: 450px;
+    max-height: 40px;
+    text-align: center;
+}
