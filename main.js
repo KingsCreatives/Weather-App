@@ -1,5 +1,7 @@
 const form = document.querySelector('.weather-form')
 const submitBtn = document.querySelector('.submit-btn')
+let message = document.querySelector('.message')
+
 
 submitBtn.addEventListener('click', e =>{
     // prevent form 
@@ -18,8 +20,30 @@ function getWeatherData(){
         console.log(data)
         // Log message if City is not available
         if(data.message == 'city not found'){
-            document.querySelector('.message').textContent = "Please search for a valid city 😩"
+            message.textContent = "Please search for a valid city 😩"
         }
+        
+        const {main, name, sys, weather} = data
+        const icon = `https://openweathermap.org/img/wn/${ weather[0]["icon"]}@2x.png`
+
+        // Use city data to create li
+        const li = document.createElement('li')
+        li.classList.add("city")
+
+        const cityWeatherData = `
+            <h2 class="city-name" data-name="${name},${sys.country}"> 
+            <span>${name}</span> 
+            <sup>${sys.country}</sup> 
+            </h2> 
+            <div class="city-temp">${Math.round(main.temp)}<sup>°C</sup></div> 
+            <figure> 
+            <img class="city-icon" src=${icon} alt=${weather[0]["main"]}> 
+            <figcaption>${weather[0]["description"]}</figcaption> 
+            </figure>
+        `
+
+        li.innerHTML = cityWeatherData
+        document.querySelector('.cities').appendChild(li)
      })
      .catch(() =>{
      })
@@ -27,5 +51,7 @@ function getWeatherData(){
 
     // clear form after submission
     form.reset()
+    message.textContent = ""
+    document.querySelector('.user-input').focus()
 }
 
