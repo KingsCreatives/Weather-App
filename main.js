@@ -2,7 +2,6 @@ const form = document.querySelector('.weather-form')
 const submitBtn = document.querySelector('.submit-btn')
 let message = document.querySelector('.message')
 let cities = document.querySelector('.cities')
-let city = document.querySelector('city')
 let userInput = document.querySelector('.user-input')
 
 
@@ -10,11 +9,54 @@ let userInput = document.querySelector('.user-input')
 submitBtn.addEventListener('click', e =>{
     // prevent form 
     e.preventDefault()
-    let cityName = userInput.value;
+    let  cityName = userInput.value;
+    const cityList = cities.querySelectorAll('.city')
+    const cityArray = Array.from(cityList)
+
+    if (cityArray.length > 0) {
+        const filteredArray = cityArray.filter(el => {
+          let content = "";
+          //athens,gr
+          if (cityName.includes(",")) {
+            //athens,grrrrrr->invalid country code, so we keep only the first part of cityName
+            if (cityName.split(",")[1].length > 2) {
+              cityName = cityName.split(",")[0];
+              content = el
+                .querySelector(".city-name span")
+                .textContent.toLowerCase();
+            } else {
+              content = el.querySelector(".city-name").dataset.name.toLowerCase();
+            }
+          } else {
+            //athens
+            content = el.querySelector(".city-name span").textContent.toLowerCase();
+          }
+          return content == cityName.toLowerCase();
+        });
     
-    
+        if (filteredArray.length > 0) {
+          message.textContent = `You already know the weather for ${
+            filteredArray[0].querySelector(".city-name span").textContent
+          } ...otherwise be more specific by providing the country code as well 😉`;
+          form.reset();
+          userInput.focus();
+          return;
+        }
+      }
+
+
+
     getWeatherData(cityName)
 })
+
+function filterCities(){
+    let cityList = cities.querySelectorAll(city)
+    let citiesArray = Array.from(cityList)
+
+    if(citiesArray.length > 0 ){
+        console.log(citiesArray)
+    }
+}
 
 function getWeatherData(cityName){
     // Fectch weather dat
