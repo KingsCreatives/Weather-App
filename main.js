@@ -1,20 +1,24 @@
 const form = document.querySelector('.weather-form')
 const submitBtn = document.querySelector('.submit-btn')
 let message = document.querySelector('.message')
+let cities = document.querySelector('.cities')
+let city = document.querySelector('city')
+let userInput = document.querySelector('.user-input')
+
 
 
 submitBtn.addEventListener('click', e =>{
     // prevent form 
     e.preventDefault()
-    getWeatherData()
+    let cityName = userInput.value;
+    
+    
+    getWeatherData(cityName)
 })
 
-function getWeatherData(){
-    // Get user input
-    const city = document.querySelector('.user-input').value
-
+function getWeatherData(cityName){
     // Fectch weather dat
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=7031c1382e369cd984df4a9c5e8c2675`)
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=7031c1382e369cd984df4a9c5e8c2675`)
      .then(res => res.json())
      .then(data =>{
         console.log(data)
@@ -24,15 +28,14 @@ function getWeatherData(){
         }
         
         const {main, name, sys, weather} = data
-        const icon = `https://openweathermap.org/img/wn/${ weather[0]["icon"]}@2x.png`
-
+        const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${weather[0]["icon"]}.svg`
         // Use city data to create li
         const li = document.createElement('li')
         li.classList.add("city")
 
         const cityWeatherData = `
             <h2 class="city-name" data-name="${name},${sys.country}"> 
-            <span>${name}</span> 
+            <span class "name-of-city">${name}</span> 
             <sup>${sys.country}</sup> 
             </h2> 
             <div class="city-temp">${Math.round(main.temp)}<sup>°C</sup></div> 
@@ -42,8 +45,10 @@ function getWeatherData(){
             </figure>
         `
 
+        
         li.innerHTML = cityWeatherData
-        document.querySelector('.cities').appendChild(li)
+        cities.appendChild(li)
+
      })
      .catch(() =>{
      })
