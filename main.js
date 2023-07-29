@@ -7,12 +7,14 @@ let userInput = document.querySelector('.user-input')
 
 
 submitBtn.addEventListener('click', e =>{
-    // prevent form 
+    
     e.preventDefault()
+
     let  cityName = userInput.value;
     const cityList = cities.querySelectorAll('.city')
     const cityArray = Array.from(cityList)
 
+    // Verify if city Data is already on the page
     if (cityArray.length > 0) {
         const filteredArray = cityArray.filter(el => {
           let content = "";
@@ -21,9 +23,7 @@ submitBtn.addEventListener('click', e =>{
             //athens,grrrrrr->invalid country code, so we keep only the first part of cityName
             if (cityName.split(",")[1].length > 2) {
               cityName = cityName.split(",")[0];
-              content = el
-                .querySelector(".city-name span")
-                .textContent.toLowerCase();
+              content = el.querySelector(".city-name span").textContent.toLowerCase();
             } else {
               content = el.querySelector(".city-name").dataset.name.toLowerCase();
             }
@@ -35,9 +35,9 @@ submitBtn.addEventListener('click', e =>{
         });
     
         if (filteredArray.length > 0) {
-          message.textContent = `You already know the weather for ${
+          message.textContent = `The weather information for ${
             filteredArray[0].querySelector(".city-name span").textContent
-          } ...otherwise be more specific by providing the country code as well 😉`;
+          } is already on the page, be more specific by providing the country code as well 😉 `;
           form.reset();
           userInput.focus();
           return;
@@ -49,14 +49,6 @@ submitBtn.addEventListener('click', e =>{
     getWeatherData(cityName)
 })
 
-function filterCities(){
-    let cityList = cities.querySelectorAll(city)
-    let citiesArray = Array.from(cityList)
-
-    if(citiesArray.length > 0 ){
-        console.log(citiesArray)
-    }
-}
 
 function getWeatherData(cityName){
     // Fectch weather dat
