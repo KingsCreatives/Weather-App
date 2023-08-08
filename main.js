@@ -35,9 +35,9 @@ submitBtn.addEventListener('click', e =>{
         });
     
         if (filteredArray.length > 0) {
-          message.textContent = `The weather information for ${
+          message.textContent = `Data for ${
             filteredArray[0].querySelector(".city-name span").textContent
-          } is already on the page, be more specific by providing the country code as well 😉 `;
+          } is already on the page`;
           form.reset();
           userInput.focus();
           return;
@@ -55,14 +55,13 @@ function getWeatherData(cityName){
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=7031c1382e369cd984df4a9c5e8c2675`)
      .then(res => res.json())
      .then(data =>{
-        console.log(data)
         // Log message if City is not available
         if(data.message == 'city not found'){
             message.textContent = "Please search for a valid city 😩"
         }
         
         const {main, name, sys, weather} = data
-        const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${weather[0]["icon"]}.svg`
+        const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
         // Use city data to create li
         const li = document.createElement('li')
         li.classList.add("city")
