@@ -52,7 +52,7 @@ submitBtn.addEventListener('click', e =>{
 
 function getWeatherData(cityName){
     // Fectch weather dat
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=7031c1382e369cd984df4a9c5e8c2675`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&APPID=7031c1382e369cd984df4a9c5e8c2675`)
      .then(res => res.json())
      .then(data =>{
         // Log message if City is not available
